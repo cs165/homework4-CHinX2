@@ -1,3 +1,32 @@
 /*
 TODO(you): Write any additional styles you need here.
 */
+
+#music {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+#gif-screen {
+    height: calc(100% - 70px);
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-color: gray;
+}
+
+footer {
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+#play {
+    height: 60px;
+    width: 60px;
+    background-size: cover;
+    background-image: url("images/pause.png");
+}
+  
