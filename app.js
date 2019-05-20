@@ -29,6 +29,7 @@ class App {
     this.menu.hide();
     this.song = event.detail.songValue;
     this.music.load(event.detail.gifValue);
+    document.getElementById('loading').classList.remove('inactive');
     //this.music.show(event.detail.songValue);
   }
 
@@ -39,6 +40,7 @@ class App {
   }
 
   loadGif(event) {
+    document.getElementById('loading').classList.add('inactive');
     this.music.show(this.song);
   }
 

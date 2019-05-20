@@ -62,8 +62,8 @@ class GifDisplay {
     //document.getElementById('gif-screen1').style.backgroundImage = 'url("'+gifUrl+'")';
     //const preUrl = this.giflist.data[idx+1].images.downsized.url;
     //document.getElementById('gif-screen2').style.backgroundImage = 'url("'+gifUrl+'")';
-    document.getElementById('gif-screen1').style.backgroundImage = 'url("'+this.gifload[idx]+'")';
-    document.getElementById('gif-screen2').style.backgroundImage = 'url("'+this.gifload[idx+1]+'")';
+    document.getElementById('gif-screen1').style.backgroundImage = 'url("'+this.gifload[idx].src+'")';
+    document.getElementById('gif-screen2').style.backgroundImage = 'url("'+this.gifload[idx+1].src+'")';
 
     document.dispatchEvent(new CustomEvent('load-finish'));
   }
@@ -76,7 +76,7 @@ class GifDisplay {
       var idx = Math.floor(Math.random() * Math.floor(this.len-1));
       while(idx === this.pick) Math.floor(Math.random() * Math.floor(this.len-1));
       this.pick = idx;
-      document.getElementById('gif-screen1').style.backgroundImage = 'url("'+this.gifload[idx]+'")';
+      document.getElementById('gif-screen1').style.backgroundImage = 'url("'+this.gifload[idx].src+'")';
       //const gifUrl = this.giflist.data[idx].images.downsized.url;
       //document.getElementById('gif-screen1').style.backgroundImage = 'url("'+gifUrl+'")';
       this.front = false;
@@ -90,7 +90,7 @@ class GifDisplay {
       this.pick = idx;
       //const gifUrl = this.giflist.data[idx].images.downsized.url;
       //document.getElementById('gif-screen2').style.backgroundImage = 'url("'+gifUrl+'")';
-      document.getElementById('gif-screen2').style.backgroundImage = 'url("'+this.gifload[idx]+'")';
+      document.getElementById('gif-screen2').style.backgroundImage = 'url("'+this.gifload[idx].src+'")';
       this.front = true;
     }
   }
