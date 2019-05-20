@@ -25,6 +25,9 @@ class GifDisplay {
     console.log('theme:'+gif);
     document.getElementById('gif-screen1').classList.remove('inactive');
     document.getElementById('gif-screen2').classList.add('inactive');
+    this.len = 2;
+    this.pick = 0;
+    this.front = true;
 
     var url = "https://api.giphy.com/v1/gifs/search?q="+gif+"&api_key="+this.apiKey+"&limit=25&rating=g";
     fetch(url)
@@ -37,7 +40,11 @@ class GifDisplay {
   _onJsonGetList(json) {
     this.giflist = json
     this.len = json.data.length;
-    console.log(this.giflist);
+    //console.log(this.giflist);
+    if(this.len < 2) {
+      document.dispatchEvent(new CustomEvent('skip-music'));
+    }
+
     var idx = Math.floor(Math.random() * Math.floor(this.len-1));
     this.pick = idx + 1;
 
@@ -53,7 +60,7 @@ class GifDisplay {
       document.getElementById('gif-screen2').classList.remove('inactive');
 
       var idx = Math.floor(Math.random() * Math.floor(this.len));
-      while(idx == this.pick) Math.floor(Math.random() * Math.floor(this.len));
+      while(idx === this.pick) Math.floor(Math.random() * Math.floor(this.len));
       this.pick = idx;
       const gifUrl = this.giflist.data[idx].images.downsized.url;
       document.getElementById('gif-screen1').style.backgroundImage = 'url("'+gifUrl+'")';
@@ -64,7 +71,7 @@ class GifDisplay {
       document.getElementById('gif-screen1').classList.remove('inactive');
 
       var idx = Math.floor(Math.random() * Math.floor(this.len));
-      while(idx == this.pick) Math.floor(Math.random() * Math.floor(this.len));
+      while(idx === this.pick) Math.floor(Math.random() * Math.floor(this.len));
       this.pick = idx;
       const gifUrl = this.giflist.data[idx].images.downsized.url;
       document.getElementById('gif-screen2').style.backgroundImage = 'url("'+gifUrl+'")';

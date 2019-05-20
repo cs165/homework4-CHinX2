@@ -12,8 +12,10 @@ class App {
     this.music = new MusicScreen(musicElement);
 
     this.gotoMusic = this.gotoMusic.bind(this);
+    this.skipMusic = this.skipMusic.bind(this);
 
     document.addEventListener('go-click', this.gotoMusic);
+    document.addEventListener('skip-music', this.skipMusic);
 
     this.menu.show();
   }
@@ -22,6 +24,12 @@ class App {
   gotoMusic(event) {
     this.menu.hide();
     this.music.show(event.detail.songValue, event.detail.gifValue);
+  }
+
+  skipMusic(event) {
+    this.music.hide();
+    document.getElementById('error').classList.remove('inactive');
+    this.menu.show();
   }
 
 }

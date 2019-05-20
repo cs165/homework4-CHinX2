@@ -26,6 +26,7 @@ class MenuScreen {
   }
 
   hide() {
+    document.getElementById('error').classList.add('inactive');
     this.containerElement.classList.add('inactive');
   }
 

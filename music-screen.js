@@ -36,14 +36,17 @@ class MusicScreen {
   }
 
   hide() {
+    this.audioPlayer.pause();
+    this.pause = true;
+    document.getElementById('play').removeEventListener('click',this._onPause);
     this.containerElement.classList.add('inactive');
   }
 
   _onPause() {
     if(this.pause) {
       this.playButton.play();
-      this.pause = false;
       this.audioPlayer.play();
+      this.pause = false;
     }
     else {
       this.playButton.pause();
