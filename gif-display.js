@@ -53,15 +53,11 @@ class GifDisplay {
       this.gifload[i] = img;
     }
 
-    console.log('0+'+this.gifload);
+    //console.log('0+'+this.gifload);
 
     var idx = Math.floor(Math.random() * Math.floor(this.len-1));
     this.pick = idx + 1;
 
-    //const gifUrl = this.giflist.data[idx].images.downsized.url;
-    //document.getElementById('gif-screen1').style.backgroundImage = 'url("'+gifUrl+'")';
-    //const preUrl = this.giflist.data[idx+1].images.downsized.url;
-    //document.getElementById('gif-screen2').style.backgroundImage = 'url("'+gifUrl+'")';
     document.getElementById('gif-screen1').style.backgroundImage = 'url("'+this.gifload[idx].src+'")';
     document.getElementById('gif-screen2').style.backgroundImage = 'url("'+this.gifload[idx+1].src+'")';
 
@@ -77,8 +73,7 @@ class GifDisplay {
       while(idx === this.pick) Math.floor(Math.random() * Math.floor(this.len-1));
       this.pick = idx;
       document.getElementById('gif-screen1').style.backgroundImage = 'url("'+this.gifload[idx].src+'")';
-      //const gifUrl = this.giflist.data[idx].images.downsized.url;
-      //document.getElementById('gif-screen1').style.backgroundImage = 'url("'+gifUrl+'")';
+      
       this.front = false;
     }
     else {
@@ -88,9 +83,8 @@ class GifDisplay {
       var idx = Math.floor(Math.random() * Math.floor(this.len-1));
       while(idx === this.pick) Math.floor(Math.random() * Math.floor(this.len-1));
       this.pick = idx;
-      //const gifUrl = this.giflist.data[idx].images.downsized.url;
-      //document.getElementById('gif-screen2').style.backgroundImage = 'url("'+gifUrl+'")';
       document.getElementById('gif-screen2').style.backgroundImage = 'url("'+this.gifload[idx].src+'")';
+      
       this.front = true;
     }
   }
