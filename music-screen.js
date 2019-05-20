@@ -12,37 +12,48 @@ class MusicScreen {
     // TODO(you): Implement the constructor and add fields as necessary.
     this.containerElement = containerElement;
     this.audioPlayer = new AudioPlayer();
+    this.playButton = new PlayButton();
+    this.gifDisplay = new GifDisplay();
+
 
     this._onPause = this._onPause.bind(this);
+    this._onKick = this._onKick.bind(this);
 
   }
   // TODO(you): Add methods as necessary.
   // Giphy api : 81V8J58dciFEHfyhxGnYEfhAL0n1b0iV
   show(song, gif) {
-    this.containerElement.classList.remove('inactive');
 
-    this.playButton = document.getElementById('play');
-    this.playButton.addEventListener('click',this._onPause);
+    document.getElementById('play').addEventListener('click',this._onPause);
+
+    this.gifDisplay.getGif(gif);
+
     this.audioPlayer.setSong(song);
+    this.audioPlayer.setKickCallback(this._onKick);
     this.audioPlayer.play();
     this.pause = false;
+    this.containerElement.classList.remove('inactive');
   }
 
   hide() {
-    this.playButton.removeEventListener('click',this._onPause);
     this.containerElement.classList.add('inactive');
   }
 
   _onPause() {
     if(this.pause) {
-      this.playButton.style.backgroundImage = 'url("images/pause.png")';
+      this.playButton.play();
       this.pause = false;
       this.audioPlayer.play();
     }
     else {
-      this.playButton.style.backgroundImage = 'url("images/play.png")';
+      this.playButton.pause();
       this.audioPlayer.pause();
       this.pause = true;
     }
+  }
+
+  _onKick() {
+    console.log('kick!');
+    this.gifDisplay.nextGif();
   }
 }
