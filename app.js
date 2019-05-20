@@ -13,9 +13,13 @@ class App {
 
     this.gotoMusic = this.gotoMusic.bind(this);
     this.skipMusic = this.skipMusic.bind(this);
+    this.loadGif = this.loadGif.bind(this);
+
+    this.song = '';
 
     document.addEventListener('go-click', this.gotoMusic);
     document.addEventListener('skip-music', this.skipMusic);
+    document.addEventListener('load-finish', this.loadGif);
 
     this.menu.show();
   }
@@ -23,7 +27,9 @@ class App {
 
   gotoMusic(event) {
     this.menu.hide();
-    this.music.show(event.detail.songValue, event.detail.gifValue);
+    this.song = event.detail.songValue;
+    this.music.load(event.detail.gifValue);
+    //this.music.show(event.detail.songValue);
   }
 
   skipMusic(event) {
@@ -31,5 +37,10 @@ class App {
     document.getElementById('error').classList.remove('inactive');
     this.menu.show();
   }
+
+  loadGif(event) {
+    this.music.show(this.song);
+  }
+
 
 }

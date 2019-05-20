@@ -11,6 +11,7 @@ class GifDisplay {
     this.len = 2;
     this.pick = 0;
     this.front = true;
+    this.gifload = new Array();
     this._onJsonGetList = this._onJsonGetList.bind(this);
 
   }
@@ -40,18 +41,31 @@ class GifDisplay {
   _onJsonGetList(json) {
     this.giflist = json
     this.len = json.data.length;
-    //console.log(this.giflist);
+    console.log(this.giflist);
     if(this.len < 2) {
       document.dispatchEvent(new CustomEvent('skip-music'));
     }
 
+    for(var i = 0 ; i < this.len ; i++) {
+      var img = new Image();
+      img.src = json.data[i].images.downsized.url;
+      console.log(img.src);
+      this.gifload[i] = img;
+    }
+
+    console.log('0+'+this.gifload);
+
     var idx = Math.floor(Math.random() * Math.floor(this.len-1));
     this.pick = idx + 1;
 
-    const gifUrl = this.giflist.data[idx].images.downsized.url;
-    document.getElementById('gif-screen1').style.backgroundImage = 'url("'+gifUrl+'")';
-    const preUrl = this.giflist.data[idx+1].images.downsized.url;
-    document.getElementById('gif-screen2').style.backgroundImage = 'url("'+gifUrl+'")';
+    //const gifUrl = this.giflist.data[idx].images.downsized.url;
+    //document.getElementById('gif-screen1').style.backgroundImage = 'url("'+gifUrl+'")';
+    //const preUrl = this.giflist.data[idx+1].images.downsized.url;
+    //document.getElementById('gif-screen2').style.backgroundImage = 'url("'+gifUrl+'")';
+    document.getElementById('gif-screen1').style.backgroundImage = 'url("'+this.gifload[idx]+'")';
+    document.getElementById('gif-screen2').style.backgroundImage = 'url("'+this.gifload[idx+1]+'")';
+
+    document.dispatchEvent(new CustomEvent('load-finish'));
   }
 
   nextGif() {
@@ -59,22 +73,24 @@ class GifDisplay {
       document.getElementById('gif-screen1').classList.add('inactive');
       document.getElementById('gif-screen2').classList.remove('inactive');
 
-      var idx = Math.floor(Math.random() * Math.floor(this.len));
-      while(idx === this.pick) Math.floor(Math.random() * Math.floor(this.len));
+      var idx = Math.floor(Math.random() * Math.floor(this.len-1));
+      while(idx === this.pick) Math.floor(Math.random() * Math.floor(this.len-1));
       this.pick = idx;
-      const gifUrl = this.giflist.data[idx].images.downsized.url;
-      document.getElementById('gif-screen1').style.backgroundImage = 'url("'+gifUrl+'")';
+      document.getElementById('gif-screen1').style.backgroundImage = 'url("'+this.gifload[idx]+'")';
+      //const gifUrl = this.giflist.data[idx].images.downsized.url;
+      //document.getElementById('gif-screen1').style.backgroundImage = 'url("'+gifUrl+'")';
       this.front = false;
     }
     else {
       document.getElementById('gif-screen2').classList.add('inactive');
       document.getElementById('gif-screen1').classList.remove('inactive');
 
-      var idx = Math.floor(Math.random() * Math.floor(this.len));
-      while(idx === this.pick) Math.floor(Math.random() * Math.floor(this.len));
+      var idx = Math.floor(Math.random() * Math.floor(this.len-1));
+      while(idx === this.pick) Math.floor(Math.random() * Math.floor(this.len-1));
       this.pick = idx;
-      const gifUrl = this.giflist.data[idx].images.downsized.url;
-      document.getElementById('gif-screen2').style.backgroundImage = 'url("'+gifUrl+'")';
+      //const gifUrl = this.giflist.data[idx].images.downsized.url;
+      //document.getElementById('gif-screen2').style.backgroundImage = 'url("'+gifUrl+'")';
+      document.getElementById('gif-screen2').style.backgroundImage = 'url("'+this.gifload[idx]+'")';
       this.front = true;
     }
   }

@@ -22,17 +22,18 @@ class MusicScreen {
   }
   // TODO(you): Add methods as necessary.
   // Giphy api : 81V8J58dciFEHfyhxGnYEfhAL0n1b0iV
-  show(song, gif) {
-
+  show(song) {
     document.getElementById('play').addEventListener('click',this._onPause);
-
-    this.gifDisplay.getGif(gif);
 
     this.audioPlayer.setSong(song);
     this.audioPlayer.setKickCallback(this._onKick);
     this.audioPlayer.play();
     this.pause = false;
     this.containerElement.classList.remove('inactive');
+  }
+
+  load(gif) {
+    this.gifDisplay.getGif(gif);
   }
 
   hide() {
